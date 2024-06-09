@@ -19,8 +19,11 @@ func (u user) GetName() string {
 	return u.name
 }
 
-
 func (u user) ListenUpdates() {
 	videoUpdate := <-u.subscription.Notify()
 	fmt.Printf("%s receieved new video - %s\n", u.name, videoUpdate.GetVideo().GetTitle())
+}
+
+func (u user) StopUpdates() {
+	u.subscription.Unsubscribe()
 }
